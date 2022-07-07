@@ -5,6 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/screens/Home';
 import MyCart from './components/screens/MyCart';
 import ProductInfo from './components/screens/ProductInfo';
+import SeeAll from './components/screens/SeeAll';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -23,6 +24,7 @@ function HomeScreen() {
           headerShown: false,
         }}>
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="SeeAll" component={SeeAll} />
         <Stack.Screen name="MyCart" component={MyCart} />
         <Stack.Screen name="ProductInfo" component={ProductInfo} />
       </Stack.Navigator>

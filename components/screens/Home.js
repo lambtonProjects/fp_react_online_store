@@ -130,6 +130,10 @@ const Home = ({navigation}) => {
     );
   };
 
+  const renderDataCard = () => {
+    return <ProductCard data ={data} key={data.id} />
+  }
+
   return (
     <View
       style={{
@@ -224,6 +228,7 @@ const Home = ({navigation}) => {
               </Text>
             </View>
             <Text
+              onPress={() => navigation.navigate('SeeAll')}
               style={{
                 fontSize: 14,
                 color: COLOURS.blue,
@@ -238,7 +243,7 @@ const Home = ({navigation}) => {
               flexWrap: 'wrap',
               justifyContent: 'space-around',
             }}>
-            {laptops.map(data => { return <ProductCard data={data} key={data.id} />; })}
+            {laptops.map((data) => { renderDataCard })}
           </View>
         </View>
 
@@ -278,6 +283,7 @@ const Home = ({navigation}) => {
               </Text>
             </View>
             <Text
+              onPress={() => navigation.navigate('SeeAll')}
               style={{
                 fontSize: 14,
                 color: COLOURS.blue,
