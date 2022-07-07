@@ -3,6 +3,9 @@ import {View, Text, StyleSheet,} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './components/screens/Home';
+import ProfileScreen from './components/screens/Profile';
+import LoginScreen from './components/screens/Login';
+import SignUpScreen from './components/screens/SignUp';
 import MyCart from './components/screens/MyCart';
 import ProductInfo from './components/screens/ProductInfo';
 import SeeAll from './components/screens/SeeAll';
@@ -27,6 +30,9 @@ function HomeScreen() {
         <Stack.Screen name="SeeAll" component={SeeAll} />
         <Stack.Screen name="MyCart" component={MyCart} />
         <Stack.Screen name="ProductInfo" component={ProductInfo} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
       </Stack.Navigator>
   );
 }
@@ -39,16 +45,15 @@ function SearchScreen() {
         </View>
   );
 }
-function ProfileScreen(){
-  return (
-    <View style={styles.container}>
-      <Text>profile screen
-        </Text>
-        </View>
-  );
 
-}
 function MyTabs() {
+  const [isLogged, setIsLogged] = useState(false);
+  const getLogged = async () => {
+    let isLogged = await AsyncStorage.getItem('isLogged');
+    setIsLogged(isLogged);
+    return JSON.parse(isLogged);
+  };
+
   return (
     <Tab.Navigator>
       <Tab.Screen 
@@ -63,7 +68,7 @@ function MyTabs() {
           tabBarIcon: ({size, color}) => (<Icon name="search" color={color} size={size} /> )}}/>
       <Tab.Screen 
         name="Profile" 
-        component={ProfileScreen}
+        component={isLogged?ProfileScreen:LoginScreen}
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
     </Tab.Navigator>
