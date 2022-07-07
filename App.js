@@ -8,6 +8,7 @@ import ProductInfo from './components/screens/ProductInfo';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const Tab = createBottomTabNavigator();
@@ -48,9 +49,21 @@ function ProfileScreen(){
 function MyTabs() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Main" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen 
+        name="Main" 
+        component={HomeScreen}
+        options={{ tabBarIcon: ({size, color}) => (<Icon name="home" color={color} size={size} />)}}
+         />
+      <Tab.Screen 
+        name="Search" 
+        component={SearchScreen} 
+        options={{
+          tabBarIcon: ({size, color}) => (<Icon name="search" color={color} size={size} /> )}}/>
+      <Tab.Screen 
+        name="Profile" 
+        component={ProfileScreen}
+        options={{
+          tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
     </Tab.Navigator>
   );
 }
