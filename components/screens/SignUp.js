@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUpScreen = ({navigation}) => {
   const [name, setName] = React.useState("");
@@ -8,6 +9,42 @@ const SignUpScreen = ({navigation}) => {
   const onChangeName = (textValue) => {setName(textValue)};
   const onChangeEmail = (textValue) => {setEmail(textValue)};
   const onChangePassword = (textValue) => {setPassword(textValue)};
+
+  const createNewUser = async (user) => {
+    let usersArray = await AsyncStorage.getItem('users');
+    usersArray = JSON.parse(usersArray);
+    
+    if (usersArray) {
+      let array = usersArray;
+      array.push(user);
+
+      try {
+        await AsyncStorage.setItem('users', JSON.stringify(array));
+        navigation.navigate('ProfileScreen', {user: user});
+      } catch (error) {
+        return error;
+      }
+    } else {
+      let array = [];
+      array.push(user);
+      try {
+        await AsyncStorage.setItem('users', JSON.stringify(array));
+        navigation.navigate('ProfileScreen', {user: user});
+      } catch (error) {
+        return error;
+      }
+    }
+  };
+
+  const setLogged = async (user) => {
+      try {
+        let loggedUser = {isLogged: true, user: user};
+        await AsyncStorage.setItem('isLogged', JSON.stringify(loggedUser));
+      } catch (error) {
+        return error;
+      }
+  };
+
     return (
       <View style={{
         alignItems: 'center',
@@ -84,11 +121,9 @@ const SignUpScreen = ({navigation}) => {
                     fontSize:20,
 
                   }} onPress={() => {
-                    //todo 
-                    // addUser to DB (orders []), 
-                    //set Logged as true (+ user data) , 
-         
-                    navigation.navigate(('ProfileScreen'), {});
+                    setLogged({name: name, email: email, password: password});
+                    createNewUser({name: name, email: email, password: password});
+                    //navigation.navigate(('ProfileScreen'), {});
                     }}>SignUp</Text>
               </TouchableOpacity>
 

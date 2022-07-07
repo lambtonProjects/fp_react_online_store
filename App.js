@@ -10,9 +10,10 @@ import MyCart from './components/screens/MyCart';
 import ProductInfo from './components/screens/ProductInfo';
 import SeeAll from './components/screens/SeeAll';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Tab = createBottomTabNavigator();
@@ -47,12 +48,21 @@ function SearchScreen() {
 }
 
 function MyTabs() {
-  const [isLogged, setIsLogged] = useState(false);
+
   const getLogged = async () => {
     let isLogged = await AsyncStorage.getItem('isLogged');
-    setIsLogged(isLogged);
-    return JSON.parse(isLogged);
+    if(isLogged == null){
+      setIsLogged(false);
+      return false;
+    }
+    isLogged = JSON.parse(isLogged);
+    setIsLogged(isLogged.isLogged);
+    return isLogged.isLogged;
   };
+  const [isLogged, setIsLogged] = useState(false);
+  useEffect(() => {
+    getLogged();
+  }, []);
 
   return (
     <Tab.Navigator>
