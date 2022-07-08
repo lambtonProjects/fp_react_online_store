@@ -7,7 +7,7 @@ const Search = () => {
 
     return (
       <View>
-        <TextInput style={styles.searchInput} value='Hello World' />
+        <TextInput style={styles.searchInput} placeholder='Product Name' />
         <ProductList items={Items} />
        </View>
     );
