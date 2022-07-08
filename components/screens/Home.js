@@ -14,7 +14,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Home = ({navigation}) => {
   const [laptops, setLaptops] = useState([]);
-  const [macbooks, setAccessory] = useState([]);
+  const [macbooks, setMacbooks] = useState([]);
 
   //get called on screen loads
   useEffect(() => {
@@ -38,7 +38,7 @@ const Home = ({navigation}) => {
       }
     }
     setLaptops(laptopsList);
-    setAccessory(macbooksList);
+    setMacbooks(macbooksList);
   };
 
   //create an product reusable card
@@ -130,8 +130,8 @@ const Home = ({navigation}) => {
     );
   };
 
-  const renderDataCard = () => {
-    return <ProductCard data ={data} key={data.id} />
+  const renderDataCard = (data) => {
+    return <ProductCard data={data} key={data.id} /> 
   }
 
   return (
@@ -228,7 +228,7 @@ const Home = ({navigation}) => {
               </Text>
             </View>
             <Text
-              onPress={() => navigation.navigate('SeeAll')}
+              onPress={() => navigation.navigate('SeeAll', 'laptops')}
               style={{
                 fontSize: 14,
                 color: COLOURS.blue,
@@ -243,7 +243,7 @@ const Home = ({navigation}) => {
               flexWrap: 'wrap',
               justifyContent: 'space-around',
             }}>
-            {laptops.map((data) => { renderDataCard })}
+            {laptops.slice(0,2).map(renderDataCard)}
           </View>
         </View>
 
@@ -283,7 +283,7 @@ const Home = ({navigation}) => {
               </Text>
             </View>
             <Text
-              onPress={() => navigation.navigate('SeeAll')}
+              onPress={() => navigation.navigate('SeeAll', 'macbooks')}
               style={{
                 fontSize: 14,
                 color: COLOURS.blue,
@@ -298,8 +298,7 @@ const Home = ({navigation}) => {
               flexWrap: 'wrap',
               justifyContent: 'space-around',
             }}>
-            {macbooks.map(data => {return <ProductCard data={data} key={data.id} />;
-            })}
+            {macbooks.slice(0,2).map(renderDataCard)}
           </View>
         </View>
       </ScrollView>
