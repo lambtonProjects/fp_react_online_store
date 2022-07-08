@@ -10,7 +10,20 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { initializeApp } from "firebase/app";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBswUAtEYm7rp_66YJ_LXN2ns-xjgu9wJc",
+  authDomain: "jsmanagment-15f9e.firebaseapp.com",
+  projectId: "jsmanagment-15f9e",
+  storageBucket: "jsmanagment-15f9e.appspot.com",
+  messagingSenderId: "290004854452",
+  appId: "1:290004854452:web:a57fa3359e0c48878119e1",
+  measurementId: "G-3V7Y7J1QEC"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 const Tab = createBottomTabNavigator();
 
