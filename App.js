@@ -9,6 +9,7 @@ import SignUpScreen from './components/screens/SignUp';
 import MyCart from './components/screens/MyCart';
 import ProductInfo from './components/screens/ProductInfo';
 import SeeAll from './components/screens/SeeAll';
+import Search from './components/screens/Search';
 import { StatusBar } from 'expo-status-bar';
 import { useState , useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -73,7 +74,7 @@ function MyTabs() {
          />
       <Tab.Screen 
         name="Search" 
-        component={SearchScreen} 
+        component={Search} 
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="search" color={color} size={size} /> )}}/>
       <Tab.Screen 
