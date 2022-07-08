@@ -14,7 +14,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Home = ({navigation}) => {
   const [laptops, setLaptops] = useState([]);
-  const [macbooks, setMacbooks] = useState([]);
+  const [macbooks, setAccessory] = useState([]);
 
   //get called on screen loads
   useEffect(() => {
@@ -38,7 +38,7 @@ const Home = ({navigation}) => {
       }
     }
     setLaptops(laptopsList);
-    setMacbooks(macbooksList);
+    setAccessory(macbooksList);
   };
 
   //create an product reusable card
@@ -130,8 +130,8 @@ const Home = ({navigation}) => {
     );
   };
 
-  const renderDataCard = (data) => {
-    return <ProductCard data={data} key={data.id} /> 
+  const renderDataCard = () => {
+    return <ProductCard data ={data} key={data.id} />
   }
 
   return (
@@ -228,7 +228,7 @@ const Home = ({navigation}) => {
               </Text>
             </View>
             <Text
-              onPress={() => navigation.navigate('SeeAll', 'laptops')}
+              onPress={() => navigation.navigate('SeeAll')}
               style={{
                 fontSize: 14,
                 color: COLOURS.blue,
@@ -243,7 +243,7 @@ const Home = ({navigation}) => {
               flexWrap: 'wrap',
               justifyContent: 'space-around',
             }}>
-            {laptops.slice(0,2).map(renderDataCard)}
+            {laptops.map((data) => { renderDataCard })}
           </View>
         </View>
 
@@ -283,7 +283,7 @@ const Home = ({navigation}) => {
               </Text>
             </View>
             <Text
-              onPress={() => navigation.navigate('SeeAll', 'macbooks')}
+              onPress={() => navigation.navigate('SeeAll')}
               style={{
                 fontSize: 14,
                 color: COLOURS.blue,
@@ -298,7 +298,8 @@ const Home = ({navigation}) => {
               flexWrap: 'wrap',
               justifyContent: 'space-around',
             }}>
-            {macbooks.slice(0,2).map(renderDataCard)}
+            {macbooks.map(data => {return <ProductCard data={data} key={data.id} />;
+            })}
           </View>
         </View>
       </ScrollView>
