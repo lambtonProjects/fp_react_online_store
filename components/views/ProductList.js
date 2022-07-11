@@ -24,7 +24,8 @@ const ProductList = ({deleteItem, navigateToDetail, items}) => {
     
     return (
         <View>
-            <FlatList data={items} renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem} onTouch={(item) => navigateToDetail(item, navigation)} />} />
+            <FlatList data={items} renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem} onTouch={(item) => navigateToDetail.navigate('ProductInfo', {productID: item.id}
+            )} />} />
         </View>
     );
   };

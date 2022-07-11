@@ -23,7 +23,7 @@ const firebaseConfig = {
   projectId: "jsmanagment-15f9e",
   storageBucket: "jsmanagment-15f9e.appspot.com",
   messagingSenderId: "290004854452",
-  appId: "1:290004854452:web:a57fa3359e0c48878119e1",
+  appId: "1:290004854452:web:a57fa3359e0c48878119e1", 
   measurementId: "G-3V7Y7J1QEC"
 };
 
@@ -48,6 +48,7 @@ function HomeScreen() {
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+        <Stack.Screen name="Search" component={Search} />
       </Stack.Navigator>
   );
 }
