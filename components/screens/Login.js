@@ -1,11 +1,53 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  global.firstCheck = false;
+  
+  
   const onChangeEmail = (textValue) => {setEmail(textValue)};
   const onChangePassword = (textValue) => {setPassword(textValue)};
+
+  const setLogged = async (user) => {
+    try {
+      let loggedUser = {isLogged: true, user: user};
+      await AsyncStorage.setItem('isLogged', JSON.stringify(loggedUser));
+      global.user = user;
+      global.isLogged = true;
+      global.firstCheck = false;
+      navigation.navigate('ProfileScreen', {user: user})
+    } catch (error) {
+      return error;
+    }
+};
+
+
+  const getUser = async () => {
+    let users = await AsyncStorage.getItem('users');
+    users = JSON.parse(users);
+    let user = {};
+    if (users) {
+      users.forEach(data => {
+        if (data.email === email && data.password === password) {
+          //setUser(data);
+          user = data;
+          console.log("currentUser" + data);
+          console.log(data)
+          setLogged(data);
+          // global.user = data;
+          //  navigation.navigate('ProfileScreen', {user: user})
+          return;
+        }
+      });
+    } else {
+      //todo show message "email or password incorrect
+    }
+  };
+
+
     return (
       <View style={{
           alignItems: 'center',
@@ -81,11 +123,13 @@ const LoginScreen = ({navigation}) => {
                     fontSize:20,
 
                   }} onPress={() => {
-                    //todo 
+                    
+                    getUser();
+
                     // getUser from DB (if exist), 
                     //set Logged as true (+ user data) , 
                     //if not exist - show message
-                    navigation.navigate(('ProfileScreen'), {});
+                    // navigation.navigate(('ProfileScreen'), {});
                     }}>Login</Text>
               </TouchableOpacity>
 

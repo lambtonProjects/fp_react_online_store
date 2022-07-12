@@ -29,6 +29,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+global.user = {};
+global.isLogged = false;
+global.firstCheck = true;
 
 const Tab = createBottomTabNavigator();
 
@@ -68,19 +71,25 @@ function MyTabs() {
     let isLogged = await AsyncStorage.getItem('isLogged');
     if(isLogged == null){
       setIsLogged(false);
+      global.isLogged = false;
       return false;
     }
     isLogged = JSON.parse(isLogged);
     setIsLogged(isLogged.isLogged);
+    global.user = isLogged.user;
+    global.isLogged = isLogged.isLogged;
     return isLogged.isLogged;
   };
   const [isLogged, setIsLogged] = useState(false);
+
   useEffect(() => {
     getLogged();
   }, []);
 
+  // <Tab.Navigator screenOptions={{ unmountOnBlur: true }}></Tab.Navigator>
   return (
-    <Tab.Navigator>
+    <Tab.Navigator >
+      
       <Tab.Screen 
         name="Main" 
         component={HomeScreen}
@@ -91,11 +100,20 @@ function MyTabs() {
         component={Search} 
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="search" color={color} size={size} /> )}}/>
-      <Tab.Screen 
+          { (global.firstCheck && isLogged || !global.firstCheck && global.isLogged)?(
+            <Tab.Screen 
+            name="Profile" 
+            component={ProfileScreen}
+            options={{
+              tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
+          ):(
+            <Tab.Screen 
         name="Profile" 
-        component={isLogged?ProfileScreen:LoginScreen}
+        component={LoginScreen}
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
+          )}
+
     </Tab.Navigator>
   );
 }

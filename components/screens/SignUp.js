@@ -39,6 +39,9 @@ const SignUpScreen = ({navigation}) => {
   const setLogged = async (user) => {
       try {
         let loggedUser = {isLogged: true, user: user};
+        global.user = user;
+        global.isLogged = true;
+        global.firstCheck = false;
         await AsyncStorage.setItem('isLogged', JSON.stringify(loggedUser));
       } catch (error) {
         return error;
@@ -121,9 +124,8 @@ const SignUpScreen = ({navigation}) => {
                     fontSize:20,
 
                   }} onPress={() => {
-                    setLogged({name: name, email: email, password: password});
-                    createNewUser({name: name, email: email, password: password});
-                    //navigation.navigate(('ProfileScreen'), {});
+                    setLogged({name: name, email: email, password: password, orders:[{orderID: "123", orderStatus: "pending"}]});// todo remove hardcoded order
+                    createNewUser({name: name, email: email, password: password, orders:[]});
                     }}>SignUp</Text>
               </TouchableOpacity>
 
