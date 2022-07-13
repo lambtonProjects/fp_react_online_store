@@ -15,6 +15,47 @@ const MyCart = ({navigation}) => {
   const [product, setProduct] = useState();
   const [total, setTotal] = useState(null);
 
+    const getLoggedUser = async () => {
+      
+    let isLogged = await AsyncStorage.getItem('isLogged');
+    if(isLogged == null){
+      navigation.navigate('LoginScreen');
+    }
+    isLogged = JSON.parse(isLogged);
+    if(isLogged.isLogged == false){
+      navigation.navigate('LoginScreen');
+    } else {
+      updateUserNewUser(isLogged.user)
+    } 
+    return isLogged.user;
+  };
+
+  const updateUserNewUser = async (user) => {
+    let usersArray = await AsyncStorage.getItem('users');
+    usersArray = JSON.parse(usersArray);
+      var array = usersArray;
+      const index = array.findIndex(object => {
+        return object.email === user.email;
+      });
+      let cartArray = await AsyncStorage.getItem('cartItems');
+      cartArray = JSON.parse(cartArray);
+      let orderList = user.orders;
+      let order = {orderID: orderList.length+1, orderStatus: "pending", orderItems: cartArray };
+      orderList.push(order);
+      array[index].orders = orderList;
+
+      try {
+        let newUser = {isLogged: true, user: array[index]};
+        await AsyncStorage.setItem('isLogged', JSON.stringify(newUser));
+        await AsyncStorage.setItem('users', JSON.stringify(array));
+        await AsyncStorage.removeItem('cartItems');
+        navigation.navigate('ProfileScreen', {user: array[index]});
+      } catch (error) {
+        return error;
+      }
+    
+  };
+
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       getDataFromDB();
@@ -75,7 +116,9 @@ const MyCart = ({navigation}) => {
 
   const checkOut = async () => {
     try {
-      await AsyncStorage.removeItem('cartItems');
+      getLoggedUser();
+      // await AsyncStorage.removeItem('cartItems');
+
     } catch (error) {
       return error;
     }

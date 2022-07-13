@@ -7,7 +7,7 @@ const ListItem = ({item, onTouch}) => {
       <TouchableOpacity style={styles.listItem} onPress={() => onTouch(item)}>
         <View style={styles.listItemView}>
        <View style={styles.listItemTextGroup}>
-        <Text style={styles.listItemText} numberOfLines={1}>{item.orderID}</Text>
+        <Text style={styles.listItemText} numberOfLines={1}>Order ID: {item.orderID}</Text>
         <Text style={styles.listItemDescriptionText} numberOfLines={1}>Status: {item.orderStatus}</Text>
        </View>
             
@@ -58,7 +58,7 @@ const ProductList = ({navigateToDetails, items}) => {
         fontWeight:'bold'
     },
     listItemDescriptionText:{
-        fontSize:12,
+        fontSize:14,
         textAlign:'left',
     }
   })

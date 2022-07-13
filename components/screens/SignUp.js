@@ -124,7 +124,7 @@ const SignUpScreen = ({navigation}) => {
                     fontSize:20,
 
                   }} onPress={() => {
-                    setLogged({name: name, email: email, password: password, orders:[{orderID: "123", orderStatus: "pending"}]});// todo remove hardcoded order
+                    setLogged({name: name, email: email, password: password, orders:[]});
                     createNewUser({name: name, email: email, password: password, orders:[]});
                     }}>SignUp</Text>
               </TouchableOpacity>

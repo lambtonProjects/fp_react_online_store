@@ -8,25 +8,24 @@ import OrdersList from '../views/OrdersList';
 
 const ProfileScreen = ({navigation}) => {
 
+  const getLogged = async () => {
+    let isLogged = await AsyncStorage.getItem('isLogged');
+    isLogged = JSON.parse(isLogged);
+    if(isLogged.isLogged === false){
+      navigation.navigate('LoginScreen');
+      return;
+    }
+    setCurrUser(isLogged.user);
 
-  // const getLogged = async () => {
-  //   let isLogged = await AsyncStorage.getItem('isLogged');
-  //   console.log(isLogged);
-  //   if(isLogged == null){
-  //     setIsLogged(false);
-  //     return false;
-  //   }
-  //   isLogged = JSON.parse(isLogged);
-  //   setIsLogged(isLogged.isLogged);
+    return isLogged.user;
+  };
 
-  //   return isLogged.isLogged;
-  // };
 
-  // getLogged();
+   const [user, setCurrUser] = useState({});
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
-      // getDataFromDB();
+      getLogged();
     });
 
     return unsubscribe;
@@ -47,9 +46,25 @@ const ProfileScreen = ({navigation}) => {
     return (
       
       <View>
-        <Text> Hi {global.user.name}</Text>
-        <Text> My Orders</Text>
-        <OrdersList items={global.user.orders}  navigateToDetail={navigation}/>
+        <Text style={{
+                textAlign:'center',
+                alignItems: 'center',
+                alignContent: 'center',
+                fontWeight: 'bold',
+                fontSize: 20,
+                margin:10
+              }}> Hi {user.name}!</Text>
+        <Text style={{
+                textAlign:'center',
+                alignItems: 'center',
+                alignContent: 'center',
+                fontSize: 20,
+                margin:10
+              }}
+              > My Orders</Text>
+        <OrdersList items={user.orders}  navigateToDetail={navigation}/>
+        <View style={{alignItems: 'center',
+                alignContent: 'center',}}>
         <TouchableOpacity style={{
                 width: 100,
                 height: 40,
@@ -70,6 +85,8 @@ const ProfileScreen = ({navigation}) => {
                     setUnlogged();
                     }}>LogOut</Text>
               </TouchableOpacity>
+        </View>
+        
        </View>
     );
   }

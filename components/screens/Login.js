@@ -32,13 +32,8 @@ const LoginScreen = ({navigation}) => {
     if (users) {
       users.forEach(data => {
         if (data.email === email && data.password === password) {
-          //setUser(data);
           user = data;
-          console.log("currentUser" + data);
-          console.log(data)
           setLogged(data);
-          // global.user = data;
-          //  navigation.navigate('ProfileScreen', {user: user})
           return;
         }
       });
