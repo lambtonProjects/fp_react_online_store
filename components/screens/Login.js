@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-root-toast';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = React.useState("");
@@ -35,11 +36,19 @@ const LoginScreen = ({navigation}) => {
           user = data;
           setLogged(data);
           return;
-        }
-      });
-    } else {
-      //todo show message "email or password incorrect
+        }else {
+          Toast.show('Email and/or Password are incorrect', {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.CENTER,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            shadow: true,
+            animation: true
+        });
     }
+      });
+    } 
   };
 
 
