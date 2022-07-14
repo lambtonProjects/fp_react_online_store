@@ -9,12 +9,13 @@ import {
   Image,
   Dimensions,
   Animated,
-  ToastAndroid,
+  
 } from 'react-native';
 import {COLOURS, Items} from '../database/Database';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Toast from 'react-native-root-toast';
 
 const ProductInfo = ({route, navigation}) => {
   const {productID} = route.params;
@@ -57,10 +58,16 @@ const ProductInfo = ({route, navigation}) => {
 
       try {
         await AsyncStorage.setItem('cartItems', JSON.stringify(array));
-        ToastAndroid.show(
-          'Item Added Successfully to cart',
-          ToastAndroid.SHORT,
-        );
+
+        Toast.show('Item Added Successfully to cart', {
+          duration: Toast.durations.SHORT,
+          position: Toast.positions.CENTER,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          shadow: true,
+          animation: true
+      });
         navigation.navigate('Home');
       } catch (error) {
         return error;
@@ -70,10 +77,15 @@ const ProductInfo = ({route, navigation}) => {
       array.push(id);
       try {
         await AsyncStorage.setItem('cartItems', JSON.stringify(array));
-        ToastAndroid.show(
-          'Item Added Successfully to cart',
-          ToastAndroid.SHORT,
-        );
+        Toast.show('Item Added Successfully to cart', {
+          duration: Toast.durations.SHORT,
+          position: Toast.positions.CENTER,
+          shadow: true,
+          animation: true,
+          hideOnPress: true,
+          shadow: true,
+          animation: true
+      });
         navigation.navigate('Home');
       } catch (error) {
         return error;
