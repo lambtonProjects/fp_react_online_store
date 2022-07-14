@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 
 
-const ListItem = ({item, onTouch}) => {
+const ListItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.listItem} onPress={() => onTouch(item)}>
+      <TouchableOpacity style={styles.listItem}>
         <View style={styles.listItemView}>
        <View style={styles.listItemTextGroup}>
-        <Text style={styles.listItemText} numberOfLines={1}>Order ID: {item.orderID}</Text>
-        <Text style={styles.listItemDescriptionText} numberOfLines={1}>Status: {item.orderStatus}</Text>
+       <Text style={styles.listItemText} numberOfLines={2}>Product Name{item.productName}</Text>
+        <Text style={styles.listItemDescriptionText} numberOfLines={1}>Product Price: {item.productPrice}</Text>
+        <Text style={styles.listItemDescriptionText} numberOfLines={1}>Category: {item.category}</Text>
        </View>
             
         </View>
@@ -17,11 +18,11 @@ const ListItem = ({item, onTouch}) => {
   };
 
 
-const OrdersList = ({navigateToDetail, items}) => {
+const ItemsList = ({items}) => {
     
     return (
         <View>
-          <FlatList data={items} renderItem={({item}) => <ListItem item={item} onTouch={(item) => navigateToDetail.navigate('OrderDetails', {orderItems: item.orderItems})} />} />
+          <FlatList data={items} renderItem={({item}) => <ListItem item={item}/>} />
 
         </View>
     );
@@ -62,4 +63,4 @@ const OrdersList = ({navigateToDetail, items}) => {
     }
   })
 
-  export default OrdersList;
+  export default ItemsList;

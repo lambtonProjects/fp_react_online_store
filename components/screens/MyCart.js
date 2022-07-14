@@ -5,11 +5,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  ToastAndroid,
+  
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {COLOURS, Items} from '../database/Database';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Toast from 'react-native-root-toast';
 
 const MyCart = ({navigation}) => {
   const [product, setProduct] = useState();
@@ -40,10 +41,9 @@ const MyCart = ({navigation}) => {
       let cartArray = await AsyncStorage.getItem('cartItems');
       cartArray = JSON.parse(cartArray);
       let orderList = user.orders;
-      let order = {orderID: orderList.length+1, orderStatus: "pending", orderItems: cartArray };
+      let order = {orderID: orderList.length+1, orderStatus: "pending", orderItems: product };
       orderList.push(order);
       array[index].orders = orderList;
-
       try {
         let newUser = {isLogged: true, user: array[index]};
         await AsyncStorage.setItem('isLogged', JSON.stringify(newUser));
@@ -123,7 +123,15 @@ const MyCart = ({navigation}) => {
       return error;
     }
 
-    ToastAndroid.show('Items will be Deliverd SOON!', ToastAndroid.SHORT);
+    Toast.show('Your order will be delivered soon!', {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.CENTER,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      shadow: true,
+      animation: true
+  });
 
     navigation.navigate('Home');
   };
