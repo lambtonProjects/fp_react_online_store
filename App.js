@@ -10,6 +10,7 @@ import MyCart from './components/screens/MyCart';
 import ProductInfo from './components/screens/ProductInfo';
 import SeeAll from './components/screens/SeeAll';
 import Search from './components/screens/Search';
+import Admin from './components/screens/Admin';
 import { StatusBar } from 'expo-status-bar';
 import { useState , useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -52,6 +53,7 @@ function HomeScreen() {
         <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="Admin" component={Admin} />
       </Stack.Navigator>
   );
 }
@@ -84,6 +86,7 @@ function MyTabs() {
 
   useEffect(() => {
     getLogged();
+    console.log(getLogged())
   }, []);
 
   // <Tab.Navigator screenOptions={{ unmountOnBlur: true }}></Tab.Navigator>
@@ -113,6 +116,15 @@ function MyTabs() {
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
           )}
+          
+      {isLogged == true   &&
+        <Tab.Screen 
+        name="Admin" 
+        component={Admin}
+        options={{ tabBarIcon: ({size, color}) => (<Icon name="unlock" color={color} size={size} />)}}
+         />
+      }
+
 
     </Tab.Navigator>
   );

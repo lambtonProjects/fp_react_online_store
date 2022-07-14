@@ -20,6 +20,7 @@ const LoginScreen = ({navigation}) => {
       global.isLogged = true;
       global.firstCheck = false;
       navigation.navigate('ProfileScreen', {user: user})
+      console.log(global.user)
     } catch (error) {
       return error;
     }
