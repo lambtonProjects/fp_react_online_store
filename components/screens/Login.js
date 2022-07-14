@@ -30,14 +30,20 @@ const LoginScreen = ({navigation}) => {
     let users = await AsyncStorage.getItem('users');
     users = JSON.parse(users);
     let user = {};
+    var found = false;
     if (users) {
       users.forEach(data => {
         if (data.email === email && data.password === password) {
           user = data;
+          found = true;
           setLogged(data);
           return;
-        }else {
-          Toast.show('Email and/or Password are incorrect', {
+        }
+         
+    
+      }); 
+      if(!found){
+        Toast.show('Email and/or Password are incorrect', {
             duration: Toast.durations.SHORT,
             position: Toast.positions.CENTER,
             shadow: true,
@@ -46,8 +52,8 @@ const LoginScreen = ({navigation}) => {
             shadow: true,
             animation: true
         });
-    }
-      });
+      }
+      
     } 
   };
 
