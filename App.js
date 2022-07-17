@@ -11,6 +11,10 @@ import ProductInfo from './components/screens/ProductInfo';
 import SeeAll from './components/screens/SeeAll';
 import Search from './components/screens/Search';
 import Admin from './components/screens/Admin';
+import CustomersList from './components/screens/CustomersList';
+import UserOrders from './components/screens/UserOrders';
+import OrderDetails from './components/screens/OrderDetails';
+import UserOrderItems from './components/screens/UserOrderItems';
 import { StatusBar } from 'expo-status-bar';
 import { useState , useEffect} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -54,6 +58,12 @@ function HomeScreen() {
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Admin" component={Admin} />
+        <Stack.Screen name="CustomersList" component={CustomersList} />
+        <Stack.Screen name="UserOrders" component={UserOrders} />
+        <Stack.Screen name="UserOrderItems" component={UserOrderItems} />
+        <Stack.Screen name="OrderDetails" component={OrderDetails} />
+        
+        
       </Stack.Navigator>
   );
 }

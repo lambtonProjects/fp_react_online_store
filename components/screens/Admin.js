@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Button } from 'react-native';
+
 
 const Admin = ({navigation}) => {
 
@@ -18,7 +19,7 @@ const Admin = ({navigation}) => {
   
     return (
       <View>
-        <TextInput style={styles.searchInput} placeholder='Product Name'  />
+        <Button  title='Go To customers list'  onPress={() => navigation.navigate('CustomersList')}/>
        </View>
     );
   }
