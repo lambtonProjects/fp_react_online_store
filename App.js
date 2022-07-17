@@ -47,7 +47,7 @@ function HomeScreen() {
   return (
       <Stack.Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: true,
         }}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="SeeAll" component={SeeAll} />
@@ -99,7 +99,6 @@ function MyTabs() {
     console.log(getLogged())
   }, []);
 
-  // <Tab.Navigator screenOptions={{ unmountOnBlur: true }}></Tab.Navigator>
   return (
     <Tab.Navigator >
       

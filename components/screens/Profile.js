@@ -15,11 +15,27 @@ const ProfileScreen = ({navigation}) => {
       navigation.navigate('LoginScreen');
       return;
     }
-    setCurrUser(isLogged.user);
+    updateLoggedUser();
+    //setCurrUser(isLogged.user);
 
     return isLogged.user;
   };
 
+  const updateLoggedUser = async () => {
+    let isLogged = await AsyncStorage.getItem('isLogged');
+    isLogged = JSON.parse(isLogged);
+    let usersArray = await AsyncStorage.getItem('users');
+    usersArray = JSON.parse(usersArray);
+    var array = usersArray;
+    const index = array.findIndex(object => {return object.email === isLogged.user.email});
+    var user = array[index];
+    setCurrUser(user);
+    var newUser = {isLogged: true, user: user};
+    await AsyncStorage.setItem('isLogged', JSON.stringify(newUser));
+
+    
+
+  };
 
    const [user, setCurrUser] = useState({});
 
