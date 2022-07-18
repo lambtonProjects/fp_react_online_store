@@ -15,6 +15,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Home = ({navigation}) => {
   const [laptops, setLaptops] = useState([]);
   const [macbooks, setMacbooks] = useState([]);
+  const [chromebooks, setChromebooks] = useState([]);
+  const [gaming, setGaming] = useState([]);
+  const [allinone, setAllinone] = useState([]);
 
   //get called on screen loads
   useEffect(() => {
@@ -30,15 +33,27 @@ const Home = ({navigation}) => {
   const getDataFromDB = () => {
     let laptopsList = [];
     let macbooksList = [];
+    let chromebooksList = [];
+    let gamingList = [];
+    let allinoneList = [];
     for (let index = 0; index < Items.length; index++) {
       if (Items[index].category == 'laptops') {
         laptopsList.push(Items[index]);
       } else if (Items[index].category == 'macbooks') {
         macbooksList.push(Items[index]);
+      }  else if (Items[index].category == 'chromebooks') {
+        chromebooksList.push(Items[index]);
+      }  else if (Items[index].category == 'gaming') {
+        gamingList.push(Items[index]);
+      }else if (Items[index].category == 'allinone') {
+        allinoneList.push(Items[index]);
       }
     }
     setLaptops(laptopsList);
     setMacbooks(macbooksList);
+    setChromebooks(chromebooksList);
+    setGaming(gamingList);
+    setAllinone(allinoneList);
   };
 
   //create an product reusable card
@@ -246,7 +261,6 @@ const Home = ({navigation}) => {
             {laptops.slice(0,2).map(renderDataCard)}
           </View>
         </View>
-
         <View
           style={{
             padding: 16,
@@ -301,6 +315,171 @@ const Home = ({navigation}) => {
             {macbooks.slice(0,2).map(renderDataCard)}
           </View>
         </View>
+
+        <View
+          style={{
+            padding: 16,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: COLOURS.black,
+                  fontWeight: '500',
+                  letterSpacing: 1,
+                }}>
+                Chromebooks
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: COLOURS.black,
+                  fontWeight: '400',
+                  opacity: 0.5,
+                  marginLeft: 10,
+                }}>
+                {chromebooks.length}
+              </Text>
+            </View>
+            <Text
+              onPress={() => navigation.navigate('SeeAll', 'chromebooks')}
+              style={{
+                fontSize: 14,
+                color: COLOURS.blue,
+                fontWeight: '400',
+              }}>
+              SeeAll
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+            }}>
+            {chromebooks.slice(0,2).map(renderDataCard)}
+          </View>
+        </View>
+
+        <View
+          style={{
+            padding: 16,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: COLOURS.black,
+                  fontWeight: '500',
+                  letterSpacing: 1,
+                }}>
+                Gaming Laptops
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: COLOURS.black,
+                  fontWeight: '400',
+                  opacity: 0.5,
+                  marginLeft: 10,
+                }}>
+                {gaming.length}
+              </Text>
+            </View>
+            <Text
+              onPress={() => navigation.navigate('SeeAll', 'gaming')}
+              style={{
+                fontSize: 14,
+                color: COLOURS.blue,
+                fontWeight: '400',
+              }}>
+              SeeAll
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+            }}>
+            {gaming.slice(0,2).map(renderDataCard)}
+          </View>
+        </View>
+
+        <View
+          style={{
+            padding: 16,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: COLOURS.black,
+                  fontWeight: '500',
+                  letterSpacing: 1,
+                }}>
+                2 in 1 Laptops
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: COLOURS.black,
+                  fontWeight: '400',
+                  opacity: 0.5,
+                  marginLeft: 10,
+                }}>
+                {allinone.length}
+              </Text>
+            </View>
+            <Text
+              onPress={() => navigation.navigate('SeeAll', 'gaming')}
+              style={{
+                fontSize: 14,
+                color: COLOURS.blue,
+                fontWeight: '400',
+              }}>
+              SeeAll
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'space-around',
+            }}>
+            {allinone.slice(0,2).map(renderDataCard)}
+          </View>
+        </View>    
       </ScrollView>
     </View>
   );
