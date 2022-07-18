@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-root-toast';
 
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({navigation,testProp}) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   global.firstCheck = false;
@@ -19,9 +19,12 @@ const LoginScreen = ({navigation}) => {
       global.user = user;
       global.isLogged = true;
       global.firstCheck = false;
-      navigation.navigate('ProfileScreen', {user: user})
+      // navigation.navigate('ProfileScreen', {user: user})
       console.log(global.user)
+      testProp(true)
+      console.log("here")
     } catch (error) {
+      console.log(error)
       return error;
     }
 };

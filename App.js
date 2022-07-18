@@ -53,8 +53,8 @@ function HomeScreen() {
         <Stack.Screen name="SeeAll" component={SeeAll} />
         <Stack.Screen name="MyCart" component={MyCart} />
         <Stack.Screen name="ProductInfo" component={ProductInfo} />
-        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        {/* <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> */}
+        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} /> */}
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="Search" component={Search} />
         <Stack.Screen name="Admin" component={Admin} />
@@ -67,15 +67,7 @@ function HomeScreen() {
       </Stack.Navigator>
   );
 }
-function SearchScreen() {
-  
-  return (
-    <View style={styles.container}>
-      <Text>search screen 
-        </Text>
-        </View>
-  );
-}
+
 
 function MyTabs() {
 
@@ -102,8 +94,9 @@ function MyTabs() {
     getLogged();
     console.log(getLogged())
   }, []);
-
+  console.log("render tab")
   return (
+    
     <Tab.Navigator >
       
       <Tab.Screen 
@@ -116,26 +109,28 @@ function MyTabs() {
         component={Search} 
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="search" color={color} size={size} /> )}}/>
-          { (global.firstCheck && isLogged || !global.firstCheck && global.isLogged)?(
+          { (global.firstCheck && isLogged || !global.firstCheck && (global.isLogged|| isLogged))?(
             <Tab.Screen 
             name="Profile" 
-            component={ProfileScreen}
+            // component={ProfileScreen}
+            children={()=><ProfileScreen testProp={setIsLogged} />}
             options={{
               tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
           ):(
             <Tab.Screen 
         name="Profile" 
-        component={LoginScreen}
+        // component={LoginScreen}
+        children={()=><LoginScreen testProp={setIsLogged} />}
         options={{
           tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
           )}
           
-      {isLogged == true && loggedUser!= undefined && loggedUser.name == "Admin" &&
+      {isLogged == true && global.user!= undefined && global.user.name == "Admin" ?
         <Tab.Screen 
         name="Admin" 
         component={Admin}
         options={{ tabBarIcon: ({size, color}) => (<Icon name="unlock" color={color} size={size} />)}}
-         />
+         />: null
       }
 
 

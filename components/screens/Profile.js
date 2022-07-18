@@ -3,16 +3,20 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react';
 import OrdersList from '../views/OrdersList';
+import { useNavigation } from '@react-navigation/native';
 
 
 
-const ProfileScreen = ({navigation}) => {
-
+const ProfileScreen = ({navigation,testProp}) => {
+  navigation=useNavigation();
   const getLogged = async () => {
     let isLogged = await AsyncStorage.getItem('isLogged');
     isLogged = JSON.parse(isLogged);
     if(isLogged.isLogged === false){
-      navigation.navigate('LoginScreen');
+      // navigation.navigate('LoginScreen');
+      global.isLogged=false;
+      testProp(false)
+      setisl
       return;
     }
     updateLoggedUser();
