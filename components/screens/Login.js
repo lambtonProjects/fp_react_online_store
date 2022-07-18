@@ -3,10 +3,13 @@ import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-root-toast';
 
-const LoginScreen = ({navigation,testProp}) => {
+import { useNavigation } from '@react-navigation/native';
+
+const LoginScreen = ({navigation,testProp,isSignup}) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   global.firstCheck = false;
+  navigation=useNavigation()
   
   
   const onChangeEmail = (textValue) => {setEmail(textValue)};
@@ -117,7 +120,7 @@ const LoginScreen = ({navigation,testProp}) => {
                   <Text style={{
                     color: 'blue',
                     fontSize:18,
-                  }} onPress={() => navigation.navigate(('SignUpScreen'), {})}>SignUp</Text>
+                  }} onPress={() => {isSignup(true)}}>SignUp</Text>
                 </TouchableOpacity>
               </View>
               <TouchableOpacity style={{

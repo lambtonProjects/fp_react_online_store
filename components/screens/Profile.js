@@ -16,7 +16,6 @@ const ProfileScreen = ({navigation,testProp}) => {
       // navigation.navigate('LoginScreen');
       global.isLogged=false;
       testProp(false)
-      setisl
       return;
     }
     updateLoggedUser();
@@ -58,6 +57,7 @@ const ProfileScreen = ({navigation,testProp}) => {
       navigation.navigate('Home', {});
       global.user = {};
       global.isLogged = false;
+      testProp(false)
     } catch (error) {
       return error;
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({navigation,testProp,isSignup}) => {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -20,7 +20,8 @@ const SignUpScreen = ({navigation}) => {
 
       try {
         await AsyncStorage.setItem('users', JSON.stringify(array));
-        navigation.navigate('ProfileScreen', {user: user});
+        // navigation.navigate('ProfileScreen', {user: user});
+        testProp(true)
       } catch (error) {
         return error;
       }
@@ -29,7 +30,8 @@ const SignUpScreen = ({navigation}) => {
       array.push(user);
       try {
         await AsyncStorage.setItem('users', JSON.stringify(array));
-        navigation.navigate('ProfileScreen', {user: user});
+        // navigation.navigate('ProfileScreen', {user: user});
+        testProp(true)
       } catch (error) {
         return error;
       }
@@ -127,6 +129,29 @@ const SignUpScreen = ({navigation}) => {
                     setLogged({name: name, email: email, password: password, orders:[]});
                     createNewUser({name: name, email: email, password: password, orders:[]});
                     }}>SignUp</Text>
+                    
+              </TouchableOpacity>
+              <TouchableOpacity style={{
+                width: 100,
+                height: 40,
+                margin:20,
+                borderColor: 'red',
+                borderWidth: 1,
+                alignItems: 'center',
+                alignContent: 'center',
+                justifyContent: true,
+                borderRadius:30
+
+              }}>
+                  <Text style={{
+                    textAlign: 'center',
+                    fontSize:20,
+                    color:'red'
+
+                  }} onPress={() => {
+                    isSignup(false)
+                    }}>cancel</Text>
+                    
               </TouchableOpacity>
 
        </View>
