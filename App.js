@@ -80,6 +80,7 @@ function SearchScreen() {
 function MyTabs() {
 
   const getLogged = async () => {
+    console.log("Calisti.....")
     let isLogged = await AsyncStorage.getItem('isLogged');
     if(isLogged == null){
       setIsLogged(false);
@@ -129,7 +130,7 @@ function MyTabs() {
           tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
           )}
           
-      {isLogged == true && loggedUser.name == "Admin" &&
+      {isLogged == true && loggedUser!= undefined && loggedUser.name == "Admin" &&
         <Tab.Screen 
         name="Admin" 
         component={Admin}
