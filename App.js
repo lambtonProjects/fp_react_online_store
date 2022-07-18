@@ -88,11 +88,14 @@ function MyTabs() {
     }
     isLogged = JSON.parse(isLogged);
     setIsLogged(isLogged.isLogged);
+    setLoggedUser(isLogged.user)
+    console.log(isLogged.user)
     global.user = isLogged.user;
     global.isLogged = isLogged.isLogged;
     return isLogged.isLogged;
   };
   const [isLogged, setIsLogged] = useState(false);
+  const [loggedUser, setLoggedUser] = useState();
 
   useEffect(() => {
     getLogged();
@@ -126,7 +129,7 @@ function MyTabs() {
           tabBarIcon: ({size, color}) => (<Icon name="user" color={color} size={size} /> )}}/>
           )}
           
-      {isLogged == true   &&
+      {isLogged == true && loggedUser.name == "Admin" &&
         <Tab.Screen 
         name="Admin" 
         component={Admin}
