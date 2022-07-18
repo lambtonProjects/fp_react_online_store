@@ -47,13 +47,13 @@ function HomeScreen() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="SeeAll" component={SeeAll} />
       <Stack.Screen name="MyCart" component={MyCart} />
       <Stack.Screen name="ProductInfo" component={ProductInfo} />
-      {/* <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> */}
+      <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       {/* <Stack.Screen name="LoginScreen" component={LoginScreen} /> */}
       {/* <Stack.Screen name="SignUpScreen" component={SignUpScreen} /> */}
       <Stack.Screen name="Search" component={Search} />
