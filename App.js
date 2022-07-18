@@ -100,7 +100,7 @@ function MyTabs() {
     <Tab.Navigator >
       
       <Tab.Screen 
-        name="Main" 
+        name="Online Store" 
         component={HomeScreen}
         options={{ tabBarIcon: ({size, color}) => (<Icon name="home" color={color} size={size} />)}}
          />
